@@ -13,6 +13,10 @@ class RequestData(BaseModel):
     topic: str
 
 
+@app.get("/")
+def home():
+    return {"message": "Agent is running 🚀"}
+
 @app.post("/generate-content")
 async def generate_content(data: RequestData):
     try:
