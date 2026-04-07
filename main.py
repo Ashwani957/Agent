@@ -1,0 +1,30 @@
+from fastapi import FastAPI
+from pydantic import BaseModel
+
+from threeMultiAgent.agent import root_agent
+from threeMultiAgent.services.runner_service import AgentService
+
+app = FastAPI()
+
+agent_service = AgentService(root_agent, "social-media-agent")
+
+
+class RequestData(BaseModel):
+    topic: str
+
+
+@app.post("/generate-content")
+async def generate_content(data: RequestData):
+    try:
+        result = await agent_service.run_agent(data.topic)
+
+        return {
+            "status": "success",
+            "response": result
+        }
+
+    except Exception as e:
+        return {
+            "status": "error",
+            "message": str(e)
+        }

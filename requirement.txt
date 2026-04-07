@@ -1,6 +1,16 @@
-google-adk
-google-generativeai
-python-dotenv
-litellm
-pydantic
-google-cloud-aiplatform[adk,agent_engines]
+# ── Core Agent Framework ──────────────────────────────────────
+google-adk==1.28.1              # Google Agent Development Kit (ADK) — Agent, ParallelAgent, SequentialAgent, LiteLlm, google_search
+
+# ── LLM / Model integrations ─────────────────────────────────
+litellm                         # LiteLLM (used via google.adk.models.lite_llm for OpenRouter + Gemini models)
+google-generativeai             # Google Generative AI SDK (transitive dependency of google-adk)
+
+# ── Web API ───────────────────────────────────────────────────
+fastapi==0.100.0                # FastAPI web framework (main.py)
+uvicorn==0.44.0                 # ASGI server to run FastAPI
+
+# ── Configuration / Environment ──────────────────────────────
+python-dotenv==1.0.1            # Loads .env variables (used in agent.py)
+
+# ── Data Validation ───────────────────────────────────────────
+pydantic==2.12.5                # Data validation (used by FastAPI and ADK internally)
