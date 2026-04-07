@@ -1,16 +1,12 @@
-# ── Core Agent Framework ──────────────────────────────────────
+# Core Agent
 google-adk==1.28.1
 
-# ── LLM / Model integrations ─────────────────────────────────
-litellm==1.40.14
-google-generativeai==0.8.3
+# API
+fastapi==0.115.0
+uvicorn==0.30.6
 
-# ── Web API ───────────────────────────────────────────────────
-fastapi>=0.124.1
-uvicorn==0.44.0
-
-# ── Configuration / Environment ──────────────────────────────
+# Config
 python-dotenv==1.0.1
 
-# ── Data Validation ───────────────────────────────────────────
-pydantic==2.12.5
+# Validation
+pydantic==2.7.4
