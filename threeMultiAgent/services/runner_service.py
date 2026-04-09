@@ -23,7 +23,7 @@ class AgentService:
             session_id=session_id
         )
 
-        final_response = ""
+        final_response = {}
 
         async for event in self.runner.run_async(
             user_id=user_id,
@@ -36,6 +36,20 @@ class AgentService:
             if hasattr(event, "content") and event.content:
                 for part in event.content.parts:
                     if hasattr(part, "text") and part.text:
-                        final_response += part.text
+                        text=part.text.strip()
+                        try:
+                            parsed=json.loads(text)
+                            for key , value in parsed.items():
+                                final_response[key]=value
+                        except:
+                            if "raw_text" in final_response:
+                                final_response["raw_text"]+="\n"+text
+                            else:
+                                final_response["raw_text"]=text
+                            
+                         
 
-        return final_response
+        return  {
+            "status":"success",
+            "response":final_response
+        }
